@@ -87,23 +87,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\werel\\.nuget\\packages\\": {},
+    "C:\\Users\\jords\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\werel\\Documents\\Local school\\GP\\TickTick\\TickTick\\Engine\\Engine.csproj",
+      "projectUniqueName": "C:\\Users\\jords\\source\\repos\\TickTick\\Engine\\Engine.csproj",
       "projectName": "Engine",
-      "projectPath": "C:\\Users\\werel\\Documents\\Local school\\GP\\TickTick\\TickTick\\Engine\\Engine.csproj",
-      "packagesPath": "C:\\Users\\werel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\werel\\Documents\\Local school\\GP\\TickTick\\TickTick\\Engine\\obj\\",
+      "projectPath": "C:\\Users\\jords\\source\\repos\\TickTick\\Engine\\Engine.csproj",
+      "packagesPath": "C:\\Users\\jords\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\jords\\source\\repos\\TickTick\\Engine\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\werel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\jords\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -158,7 +158,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }
