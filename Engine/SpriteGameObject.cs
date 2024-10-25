@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Engine
 {
@@ -17,21 +18,26 @@ namespace Engine
         /// The origin ('offset') to use when drawing the sprite on the screen.
         /// </summary>
         public Vector2 Origin { get; set; }
-
+        Camera camera = new Camera();
         /// <summary>
         /// The sheet index of the attached sprite sheet.
         /// </summary>
+        /// 
+
+
         public int SheetIndex
         {
             get { return sprite.SheetIndex; }
             set { sprite.SheetIndex = value; }
         }
 
-        /// <summary>
-        /// The depth (between 0 and 1) at which this object should be drawn. 
-        /// A larger value means that the object will be drawn on top.
-        /// </summary>
-        protected float depth;
+            
+
+    /// <summary>
+    /// The depth (between 0 and 1) at which this object should be drawn. 
+    /// A larger value means that the object will be drawn on top.
+    /// </summary>
+    protected float depth;
 
         /// <summary>
         /// Creates a new SpriteGameObject with a given sprite name.
@@ -42,10 +48,11 @@ namespace Engine
         public SpriteGameObject(string spriteName, float depth, int sheetIndex = 0)
         {
             this.depth = depth;
-
+            
             if (spriteName != null)
                 sprite = new SpriteSheet(spriteName, depth, sheetIndex);
             Origin = Vector2.Zero;
+
         }
 
         /// <summary>
@@ -54,21 +61,35 @@ namespace Engine
         /// </summary>
         /// <param name="gameTime">An object containing information about the time that has passed in the game.</param>
         /// <param name="spriteBatch">A sprite batch object used for drawing sprites.</param>
+        /// 
+
+        
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             if (!Visible)
                 return;
-
+            
             // draw the sprite at its *global* position in the game world
             if (sprite != null)
-                sprite.Draw(spriteBatch, GlobalPosition, Origin);
+            {
+                if (depth == 0.6f || depth == 0.5f)
+                {
+                    sprite.Draw(spriteBatch, GlobalPosition-camera.cameraPosition, Origin);
+                    
+                }
+                else
+                {
+                    sprite.Draw(spriteBatch, GlobalPosition, Origin);
+                }
+            }
+                
         }
 
         /// <summary>
         /// Gets the width of this object in the game world, according to its sprite.
         /// </summary>
         public int Width { get { return sprite.Width; } }
-
+        
         /// <summary>
         /// Gets the height of this object in the game world, according to its sprite.
         /// </summary>
@@ -93,7 +114,14 @@ namespace Engine
                 // get the sprite's bounds
                 Rectangle spriteBounds = sprite.Bounds;
                 // add the object's position to it as an offset
-                spriteBounds.Offset(GlobalPosition - Origin);
+                if (depth == 0.5f || depth == 0.6f)
+                {
+                    spriteBounds.Offset(GlobalPosition - Origin);
+                }
+                else
+                {
+                    spriteBounds.Offset(GlobalPosition - Origin);
+                }
                 return spriteBounds;
             }
         }

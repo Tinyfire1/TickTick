@@ -16,7 +16,6 @@ class Tile : GameObject
     {
         this.type = type;
         this.surface = surface;
-
         // add an image depending on the type
         string surfaceExtension = "";
         if (surface == SurfaceType.Hot)

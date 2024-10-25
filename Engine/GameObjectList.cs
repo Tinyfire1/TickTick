@@ -12,7 +12,7 @@ namespace Engine
         /// <summary>
         /// The child objects of this game object.
         /// </summary>
-        List<GameObject> children;
+        public List<GameObject> children;
 
         /// <summary>
         /// Creates a new GameObjectList with an empty list of children.

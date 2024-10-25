@@ -33,7 +33,7 @@ class LevelMenuState : GameState
         for (int i = 0; i < ExtendedGameWithLevels.NumberOfLevels; i++)
         {
             // create the button
-            LevelButton levelButton = new LevelButton(i + 1, ExtendedGameWithLevels.GetLevelStatus(i + 1));
+            LevelButton levelButton = new LevelButton(i+1, ExtendedGameWithLevels.GetLevelStatus(i+1));
 
             // give it the correct position
             int row = i / buttonsPerRow;
