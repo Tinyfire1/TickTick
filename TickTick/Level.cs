@@ -72,7 +72,7 @@ partial class Level : GameObjectList
     {
         return new Vector2(x * TileWidth, y * TileHeight);
     }
-
+ 
     public Point GetTileCoordinates(Vector2 position)
     {
         return new Point((int)Math.Floor(position.X / TileWidth), (int)Math.Floor(position.Y / TileHeight));
