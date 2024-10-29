@@ -71,6 +71,7 @@ class PlayingState : GameState, IPlayingState
 
         // show or hide the "game over" image
         gameOverOverlay.Visible = !level.Player.IsAlive;
+
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

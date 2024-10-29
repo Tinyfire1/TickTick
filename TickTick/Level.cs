@@ -16,6 +16,7 @@ partial class Level : GameObjectList
 
     SpriteGameObject goal;
     BombTimer timer;
+
     bool completionDetected;
 
     public Level(int levelIndex, string filename)
@@ -27,6 +28,7 @@ partial class Level : GameObjectList
         SpriteGameObject backgroundSky = new SpriteGameObject("Sprites/Backgrounds/spr_sky", TickTick.Depth_Background);
         backgroundSky.LocalPosition = new Vector2(0, 825 - backgroundSky.Height);
         backgrounds.AddChild(backgroundSky);
+
         AddChild(backgrounds);
 
         // load the rest of the level
@@ -43,7 +45,7 @@ partial class Level : GameObjectList
                 "Sprites/Backgrounds/spr_mountain_" + (ExtendedGame.Random.Next(2) + 1),
                 TickTick.Depth_Background + 0.01f * (float)ExtendedGame.Random.NextDouble());
 
-            mountain.LocalPosition = new Vector2(mountain.Width * (i-1) * 0.4f, 
+            mountain.LocalPosition = new Vector2(mountain.Width * (i - 1) * 0.4f,
                 BoundingBox.Height - mountain.Height);
 
             backgrounds.AddChild(mountain);
@@ -52,8 +54,6 @@ partial class Level : GameObjectList
         // add clouds
         for (int i = 0; i < 6; i++)
             backgrounds.AddChild(new Cloud(this));
-
-        
     }
 
     public Rectangle BoundingBox
@@ -72,10 +72,10 @@ partial class Level : GameObjectList
     {
         return new Vector2(x * TileWidth, y * TileHeight);
     }
- 
+
     public Point GetTileCoordinates(Vector2 position)
     {
-       return new Point((int)Math.Floor(position.X / TileWidth), (int)Math.Floor(position.Y / TileHeight));
+        return new Point((int)Math.Floor(position.X / TileWidth), (int)Math.Floor(position.Y / TileHeight));
     }
 
     public Tile.Type GetTileType(int x, int y)

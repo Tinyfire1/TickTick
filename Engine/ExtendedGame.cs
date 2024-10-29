@@ -13,6 +13,7 @@ namespace Engine
 
         // object for handling keyboard and mouse input
         protected InputHelper inputHelper;
+
         /// <summary>
         /// The width and height of the game world, in game units.
         /// </summary>
@@ -21,7 +22,7 @@ namespace Engine
         /// <summary>
         /// The width and height of the window, in pixels.
         /// </summary>
-        public Point windowSize;
+        protected Point windowSize;
 
         /// <summary>
         /// A matrix used for scaling the game world so that it fits inside the window.
@@ -61,13 +62,12 @@ namespace Engine
             // default window and world size
             windowSize = new Point(1024, 768);
             worldSize = new Point(1024, 768);
-
         }
 
         /// <summary>
         /// Does the initialization tasks that involve assets, and then prepares the game world.
         /// Override this method to do your own specific things when your game starts.
-        /// </summary>x
+        /// </summary>
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);

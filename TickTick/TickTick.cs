@@ -11,6 +11,7 @@ class TickTick : ExtendedGameWithLevels
     public const float Depth_LevelObjects = 0.6f; // for all game objects except the player
     public const float Depth_LevelPlayer = 0.7f; // for the player
 
+
     [STAThread]
     static void Main()
     {
@@ -26,10 +27,11 @@ class TickTick : ExtendedGameWithLevels
     protected override void LoadContent()
     {
         base.LoadContent();
+
         // set a custom world and window size
         worldSize = new Point(1440, 825);
         windowSize = new Point(1024, 586);
-        
+
         // to let these settings take effect, we need to set the FullScreen property again
         FullScreen = false;
 
@@ -48,5 +50,5 @@ class TickTick : ExtendedGameWithLevels
         // play background music
         AssetManager.PlaySong("Sounds/snd_music", true);
     }
-    
+
 }
