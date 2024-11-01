@@ -32,8 +32,8 @@ partial class Level : GameObjectList
         AddChild(backgrounds);
 
         // load the rest of the level
-        LoadLevelFromFile(filename);
-
+        LoadLevelFromFile(filename,TileWidth,TileHeight);
+        
         // add the timer
         timer = new BombTimer();
         AddChild(timer);
@@ -143,6 +143,7 @@ partial class Level : GameObjectList
     {
         base.Reset();
         completionDetected = false;
+        
     }
 }
 

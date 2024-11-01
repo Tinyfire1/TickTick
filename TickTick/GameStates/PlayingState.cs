@@ -48,7 +48,10 @@ class PlayingState : GameState, IPlayingState
             else if (completedOverlay.Visible)
             {
                 if (inputHelper.KeyPressed(Keys.Space))
+                {
                     ExtendedGameWithLevels.GoToNextLevel(level.LevelIndex);
+                    Camera.Instance.cameraPosition = Vector2.Zero;
+                }
             }
 
             // otherwise, update the level itself, and check for button presses
@@ -57,7 +60,12 @@ class PlayingState : GameState, IPlayingState
                 level.HandleInput(inputHelper);
 
                 if (quitButton.Pressed)
+                {
+                    Camera.Instance.cameraPosition = Vector2.Zero;
+                    Camera.Instance.WorldSize = Camera.Instance.DefaultWorldSize;
                     ExtendedGame.GameStateManager.SwitchTo(ExtendedGameWithLevels.StateName_LevelSelect);
+                }
+                    
             }
         }
     }
@@ -71,7 +79,7 @@ class PlayingState : GameState, IPlayingState
 
         // show or hide the "game over" image
         gameOverOverlay.Visible = !level.Player.IsAlive;
-
+        
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -84,7 +92,7 @@ class PlayingState : GameState, IPlayingState
     public void LoadLevel(int levelIndex)
     {
         level = new Level(levelIndex, ExtendedGame.ContentRootDirectory + "/Levels/level" + levelIndex + ".txt");
-
+        
         // hide the overlay images
         completedOverlay.Visible = false;
         gameOverOverlay.Visible = false;
@@ -100,5 +108,8 @@ class PlayingState : GameState, IPlayingState
 
         // mark the level as solved, and unlock the next level
         ExtendedGameWithLevels.MarkLevelAsSolved(levelIndex);
+
+
+        
     }
 }

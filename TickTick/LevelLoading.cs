@@ -5,7 +5,7 @@ using System.IO;
 
 partial class Level : GameObjectList
 {
-    void LoadLevelFromFile(string filename)
+    void LoadLevelFromFile(string filename, int TileWidth, int TileHeight)
     {
         // open the file
         StreamReader reader = new StreamReader(filename);
@@ -62,7 +62,7 @@ partial class Level : GameObjectList
 
         // prepare the grid arrays
         tiles = new Tile[gridWidth, gridHeight];
-
+        Camera.Instance.WorldSize = new Point(gridWidth*TileWidth, gridHeight*TileHeight);
         // load the tiles
         for (int y = 0; y < gridHeight; y++)
         {

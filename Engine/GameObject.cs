@@ -82,6 +82,7 @@ namespace Engine
         public virtual void Reset()
         {
             velocity = Vector2.Zero;
+            Camera.Instance.cameraPosition = new Vector2(0, 0);
         }
 
         /// <summary>

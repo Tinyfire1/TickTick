@@ -29,8 +29,8 @@ class TickTick : ExtendedGameWithLevels
         base.LoadContent();
 
         // set a custom world and window size
-        worldSize = new Point(1440, 825);
-        windowSize = new Point(1024, 586);
+        worldSize = new Point(Camera.Instance.WorldSize.X,Camera.Instance.WorldSize.Y);
+        windowSize = new Point(Camera.Instance.cameraView.Width, Camera.Instance.cameraView.Height);
 
         // to let these settings take effect, we need to set the FullScreen property again
         FullScreen = false;
@@ -49,6 +49,13 @@ class TickTick : ExtendedGameWithLevels
 
         // play background music
         AssetManager.PlaySong("Sounds/snd_music", true);
+    }
+
+    protected override void Update(GameTime gameTime)
+    {
+        base.Update(gameTime);
+        worldSize = new Point(Camera.Instance.WorldSize.X, Camera.Instance.WorldSize.Y);
+        
     }
 
 }

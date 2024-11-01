@@ -22,7 +22,7 @@ namespace Engine
         /// <summary>
         /// The width and height of the window, in pixels.
         /// </summary>
-        protected Point windowSize;
+        public Point windowSize;
 
         /// <summary>
         /// A matrix used for scaling the game world so that it fits inside the window.
@@ -49,7 +49,7 @@ namespace Engine
         /// <summary>
         /// Creates a new ExtendedGame object.
         /// </summary>
-        protected ExtendedGame()
+        public ExtendedGame()
         {
             // MonoGame preparations
             Content.RootDirectory = ContentRootDirectory;
@@ -207,6 +207,13 @@ namespace Engine
         {
             Vector2 viewportTopLeft = new Vector2(GraphicsDevice.Viewport.X, GraphicsDevice.Viewport.Y);
             float screenToWorldScale = worldSize.X / (float)GraphicsDevice.Viewport.Width;
+            return (screenPosition - viewportTopLeft) * screenToWorldScale;
+        }
+
+        public Vector2 ScreenToWorldCamera(Vector2 screenPosition)
+        {
+            Vector2 viewportTopLeft = new Vector2(GraphicsDevice.Viewport.X, GraphicsDevice.Viewport.Y);
+            float screenToWorldScale = Camera.Instance.DefaultWorldSize.X / (float)(GraphicsDevice.Viewport.Width);
             return (screenPosition - viewportTopLeft) * screenToWorldScale;
         }
     }

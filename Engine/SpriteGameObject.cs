@@ -13,7 +13,6 @@ namespace Engine
         /// </summary>
         protected SpriteSheet sprite;
 
-
         /// <summary>
         /// The origin ('offset') to use when drawing the sprite on the screen.
         /// </summary>
@@ -43,7 +42,6 @@ namespace Engine
         public SpriteGameObject(string spriteName, float depth, int sheetIndex = 0)
         {
             this.depth = depth;
-
             if (spriteName != null)
                 sprite = new SpriteSheet(spriteName, depth, sheetIndex);
 
@@ -53,13 +51,23 @@ namespace Engine
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            
             if (depth == 0.7f)
             {
-                if (GlobalPosition.X >= 150)
+                System.Diagnostics.Debug.WriteLine("CamRight = " + (Camera.Instance.cameraView.Width + Camera.Instance.cameraPosition.X));
+                if (GlobalPosition.X + Origin.X >= Camera.Instance.WindowSize.X/2 && Camera.Instance.WorldSize.X >= Camera.Instance.cameraView.Width + Camera.Instance.cameraPosition.X + Camera.Instance.WindowSize.X/2 - Origin.X)
                 {
-                    Camera.Instance.cameraPosition.X = GlobalPosition.X - 150;
+                    //moves the camera
+                    Camera.Instance.cameraPosition.X = GlobalPosition.X + Origin.X - Camera.Instance.WindowSize.X / 2;
+                    //checks if the right bound of the camera is outside the right side of the world, if so push it back.
+                    if(Camera.Instance.WorldSize.X <= Camera.Instance.cameraView.Width + Camera.Instance.cameraPosition.X + Camera.Instance.WindowSize.X / 2 - Origin.X)
+                    {
+                        Camera.Instance.cameraPosition.X = Camera.Instance.WorldSize.X - Camera.Instance.cameraView.Width - Camera.Instance.WindowSize.X/2 + Origin.X;
+                    }
                 }
             }
+
+
 
         }
         /// <summary>
@@ -78,6 +86,8 @@ namespace Engine
             {
                 if (depth >= 0.5f && depth <= 0.7f)
                     sprite.Draw(spriteBatch, GlobalPosition - Camera.Instance.cameraPosition, Origin);
+                else if(depth < 0.5f)
+                    sprite.Draw(spriteBatch, GlobalPosition - Camera.Instance.cameraPosition*depth*30, Origin);
                 else
                     sprite.Draw(spriteBatch, GlobalPosition, Origin);
             }
