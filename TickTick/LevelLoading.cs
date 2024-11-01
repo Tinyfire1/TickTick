@@ -5,6 +5,7 @@ using System.IO;
 
 partial class Level : GameObjectList
 {
+    List<Modifier> modifiers;
     void LoadLevelFromFile(string filename, int TileWidth, int TileHeight)
     {
         // open the file
@@ -59,6 +60,7 @@ partial class Level : GameObjectList
 
         // initialize the list of water drops
         waterDrops = new List<WaterDrop>();
+        modifiers = new List<Modifier>();
 
         // prepare the grid arrays
         tiles = new Tile[gridWidth, gridHeight];
@@ -97,6 +99,8 @@ partial class Level : GameObjectList
             LoadGoal(x, y);
         else if (symbol == 'W')
             LoadWaterDrop(x, y);
+        else if (symbol == 'M')
+            LoadModifier(x, y);
         else if (symbol == 'R')
             LoadRocketEnemy(x, y);
         else if (symbol == 'T')
@@ -154,6 +158,17 @@ partial class Level : GameObjectList
         AddChild(w);
         // store an extra reference to it
         waterDrops.Add(w);
+    }
+    
+    void LoadModifier(int x, int y)
+    {
+        // create the water drop object;  place it around the center of the tile
+        Vector2 pos = GetCellPosition(x, y) + new Vector2(TileWidth / 2, TileHeight / 3);
+        Modifier mod = new Modifier(this, pos);
+        // add it to the game world
+        AddChild(mod);
+        // store an extra reference to it
+        modifiers.Add(mod);
     }
 
     void LoadRocketEnemy(int x, int y)

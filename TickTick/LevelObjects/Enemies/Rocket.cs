@@ -1,4 +1,5 @@
-﻿using Engine;
+﻿using System.Diagnostics;
+using Engine;
 using Microsoft.Xna.Framework;
 
 /// <summary>
@@ -37,6 +38,7 @@ class Rocket : AnimatedGameObject
     {
         // go back to the starting position
         LocalPosition = startPosition;
+        Visible = true;
     }
 
     public override void Update(GameTime gameTime)
@@ -48,9 +50,22 @@ class Rocket : AnimatedGameObject
             Reset();
         else if (!sprite.Mirror && BoundingBox.Left > level.BoundingBox.Right)
             Reset();
+        
+        // check if the player jumps on the rocket
+        if (Visible && level.Player.CanCollideWithObjects && HasPixelPreciseCollision(level.Player) )
+        {
+            if (IsHitFromTop(level.Player))
+            {
+                Visible = false;
+                ExtendedGame.AssetManager.PlaySoundEffect("Sounds/snd_watercollected");
+            }
+        }
 
         // if the rocket touches the player, the player dies
-        if (level.Player.CanCollideWithObjects && HasPixelPreciseCollision(level.Player))
-            level.Player.Die();
+        if (Visible && level.Player.CanCollideWithObjects && HasPixelPreciseCollision(level.Player))
+            if (!IsHitFromTop(level.Player))
+            {
+                level.Player.Die();
+            }
     }
 }
