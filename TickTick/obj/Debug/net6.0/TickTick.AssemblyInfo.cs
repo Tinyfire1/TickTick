@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TickTick")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+02d0e228ba6881471e8833d78eff69bd1f80e583")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0cd27258cf54875ebc68404ddc351cadd55c48d1")]
 [assembly: System.Reflection.AssemblyProductAttribute("TickTick")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TickTick")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

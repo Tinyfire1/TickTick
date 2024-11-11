@@ -351,6 +351,18 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/LevelObjects/spr_goal.png
 
+#begin Sprites/LevelObjects/spr_SLOW.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/LevelObjects/spr_SLOW.png
+
 #begin Sprites/LevelObjects/spr_SPEED.png
 /importer:TextureImporter
 /processor:TextureProcessor

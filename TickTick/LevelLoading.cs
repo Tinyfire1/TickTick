@@ -5,7 +5,8 @@ using System.IO;
 
 partial class Level : GameObjectList
 {
-    List<Modifier> modifiers;
+    List<FastModifier> Fast;
+    List<SlowModifier> Slow;
     void LoadLevelFromFile(string filename, int TileWidth, int TileHeight)
     {
         // open the file
@@ -60,7 +61,8 @@ partial class Level : GameObjectList
 
         // initialize the list of water drops
         waterDrops = new List<WaterDrop>();
-        modifiers = new List<Modifier>();
+        Fast = new List<FastModifier>();
+        Slow = new List<SlowModifier>();
 
         // prepare the grid arrays
         tiles = new Tile[gridWidth, gridHeight];
@@ -99,8 +101,10 @@ partial class Level : GameObjectList
             LoadGoal(x, y);
         else if (symbol == 'W')
             LoadWaterDrop(x, y);
+        else if (symbol == 'F')
+            LoadFastModifier(x, y);
         else if (symbol == 'M')
-            LoadModifier(x, y);
+            LoadSlowModifier(x, y);
         else if (symbol == 'R')
             LoadRocketEnemy(x, y);
         else if (symbol == 'T')
@@ -160,15 +164,26 @@ partial class Level : GameObjectList
         waterDrops.Add(w);
     }
     
-    void LoadModifier(int x, int y)
+    void LoadFastModifier(int x, int y)
     {
-        // create the water drop object;  place it around the center of the tile
+        // create the Fast object;  place it around the center of the tile
         Vector2 pos = GetCellPosition(x, y) + new Vector2(TileWidth / 2, TileHeight / 3);
-        Modifier mod = new Modifier(this, pos);
+        FastModifier mod = new FastModifier(this, pos);
         // add it to the game world
         AddChild(mod);
         // store an extra reference to it
-        modifiers.Add(mod);
+        Fast.Add(mod);
+    }
+    
+    void LoadSlowModifier(int x, int y)
+    {
+        // create the Fast object;  place it around the center of the tile
+        Vector2 pos = GetCellPosition(x, y) + new Vector2(TileWidth / 2, TileHeight / 3);
+        SlowModifier slow = new SlowModifier(this, pos);
+        // add it to the game world
+        AddChild(slow);
+        // store an extra reference to it
+        Slow.Add(slow);
     }
 
     void LoadRocketEnemy(int x, int y)

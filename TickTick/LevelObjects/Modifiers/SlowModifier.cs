@@ -2,33 +2,31 @@ using System;
 using Microsoft.Xna.Framework;
 using Engine;
 
-class Modifier : SpriteGameObject
+class SlowModifier : SpriteGameObject
 {
     Level level;
     protected float bounce;
     Vector2 startPosition;
     int counter = 0;
-    bool SpeedBoostActive = false;
+    bool SlowDownActive = false;
     bool Activated = false;
     
 
-    public Modifier(Level level, Vector2 startPosition) : base("Sprites/LevelObjects/spr_SPEED", TickTick.Depth_LevelObjects)
+    public SlowModifier(Level level, Vector2 startPosition) : base("Sprites/LevelObjects/spr_SLOW", TickTick.Depth_LevelObjects)
     {
         this.level = level;
         this.startPosition = startPosition;
-
         SetOriginToCenter();
-
         Reset();
     }
 
     public void speedModifier(Player player)
     {
         Activated = true;
-        if (!SpeedBoostActive)
+        if (!SlowDownActive)
         {
-            player.walkingSpeed += 300f;
-            SpeedBoostActive = true;
+            player.walkingSpeed -= 300f;
+            SlowDownActive = true;
             counter = 0;
         }
         
@@ -38,10 +36,10 @@ class Modifier : SpriteGameObject
     {
         counter += gameTime.ElapsedGameTime.Milliseconds;
 
-        if (SpeedBoostActive && counter >= 1000)
+        if (SlowDownActive && counter >= 1000)
         {
-            player.walkingSpeed -= 300f;
-            SpeedBoostActive = false;
+            player.walkingSpeed += 300f;
+            SlowDownActive = false;
             counter = 0;
             Activated = false;
         }
