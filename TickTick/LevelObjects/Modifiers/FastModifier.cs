@@ -12,7 +12,7 @@ class FastModifier : SpriteGameObject
     bool Activated = false;
     
 
-    public FastModifier(Level level, Vector2 startPosition) : base("Sprites/LevelObjects/spr_SPEED", TickTick.Depth_LevelObjects)
+    public FastModifier(Level level, Vector2 startPosition) : base("Sprites/LevelObjects/Modifiers/spr_SPEED", TickTick.Depth_LevelObjects)
     {
         this.level = level;
         this.startPosition = startPosition;
