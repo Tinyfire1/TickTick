@@ -10,6 +10,7 @@ class NoDieModifier : SpriteGameObject
     int counter = 0;
     public static bool ImmActive = false;
     bool Activated = false;
+    private bool Touchable = true;
 
     public NoDieModifier(Level level, Vector2 startPosition) : base("Sprites/LevelObjects/Modifiers/spr_Immune", TickTick.Depth_LevelObjects)
     {
@@ -39,7 +40,7 @@ class NoDieModifier : SpriteGameObject
             ImmActive = false;
             counter = 0;
             Activated = false;
-            
+            Visible = false;
         }
     }
     
@@ -53,10 +54,10 @@ class NoDieModifier : SpriteGameObject
         localPosition.Y += bounce;
 
         // check if the player collects this water drop
-        if (Visible && level.Player.CanCollideWithObjects && HasPixelPreciseCollision(level.Player))
+        if (Touchable && level.Player.CanCollideWithObjects && HasPixelPreciseCollision(level.Player))
         {
             Immune();
-            Visible = false;
+            Touchable = false;
             ExtendedGame.AssetManager.PlaySoundEffect("Sounds/snd_watercollected");
         }
 
@@ -71,5 +72,6 @@ class NoDieModifier : SpriteGameObject
     {
         localPosition = startPosition;
         Visible = true;
+        Touchable = true;
     }
 }
