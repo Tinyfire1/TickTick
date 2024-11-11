@@ -2,17 +2,17 @@ using System;
 using Microsoft.Xna.Framework;
 using Engine;
 
-class SlowModifier : SpriteGameObject
+class JumpModifier : SpriteGameObject
 {
     Level level;
     protected float bounce;
     Vector2 startPosition;
     int counter = 0;
-    bool SlowDownActive = false;
+    bool JumpBoostActive = false;
     bool Activated = false;
     
 
-    public SlowModifier(Level level, Vector2 startPosition) : base("Sprites/LevelObjects/Modifiers/spr_SLOW", TickTick.Depth_LevelObjects)
+    public JumpModifier(Level level, Vector2 startPosition) : base("Sprites/LevelObjects/Modifiers/spr_JUMP", TickTick.Depth_LevelObjects)
     {
         this.level = level;
         this.startPosition = startPosition;
@@ -20,13 +20,13 @@ class SlowModifier : SpriteGameObject
         Reset();
     }
 
-    public void speedModifier(Player player)
+    public void jumper(Player player)
     {
         Activated = true;
-        if (!SlowDownActive)
+        if (!JumpBoostActive)
         {
-            player.walkingSpeed -= 300f;
-            SlowDownActive = true;
+            player.walkingSpeed += 300f;
+            JumpBoostActive = true;
             counter = 0;
         }
         
@@ -36,10 +36,10 @@ class SlowModifier : SpriteGameObject
     {
         counter += gameTime.ElapsedGameTime.Milliseconds;
 
-        if (SlowDownActive && counter >= 1000)
+        if (JumpBoostActive && counter >= 1000)
         {
-            player.walkingSpeed += 300f;
-            SlowDownActive = false;
+            player.walkingSpeed -= 300f;
+            JumpBoostActive = false;
             counter = 0;
             Activated = false;
         }
@@ -57,7 +57,7 @@ class SlowModifier : SpriteGameObject
         // check if the player collects this water drop
         if (Visible && level.Player.CanCollideWithObjects && HasPixelPreciseCollision(level.Player))
         {
-            speedModifier(level.Player);
+            jumper(level.Player);
             Visible = false;
             ExtendedGame.AssetManager.PlaySoundEffect("Sounds/snd_watercollected");
         }

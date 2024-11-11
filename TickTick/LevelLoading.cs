@@ -7,6 +7,7 @@ partial class Level : GameObjectList
 {
     List<FastModifier> Fast;
     List<SlowModifier> Slow;
+    List<JumpModifier> Jump;
     void LoadLevelFromFile(string filename, int TileWidth, int TileHeight)
     {
         // open the file
@@ -105,6 +106,8 @@ partial class Level : GameObjectList
             LoadFastModifier(x, y);
         else if (symbol == 'M')
             LoadSlowModifier(x, y);
+        else if (symbol == 'J')
+            LoadJumpModifier(x, y);
         else if (symbol == 'R')
             LoadRocketEnemy(x, y);
         else if (symbol == 'T')
@@ -177,13 +180,24 @@ partial class Level : GameObjectList
     
     void LoadSlowModifier(int x, int y)
     {
-        // create the Fast object;  place it around the center of the tile
+        // create the slow object;  place it around the center of the tile
         Vector2 pos = GetCellPosition(x, y) + new Vector2(TileWidth / 2, TileHeight / 3);
         SlowModifier slow = new SlowModifier(this, pos);
         // add it to the game world
         AddChild(slow);
         // store an extra reference to it
         Slow.Add(slow);
+    }
+    
+    void LoadJumpModifier(int x, int y)
+    {
+        // create the jump object;  place it around the center of the tile
+        Vector2 pos = GetCellPosition(x, y) + new Vector2(TileWidth / 2, TileHeight / 3);
+        JumpModifier jmp = new JumpModifier(this, pos);
+        // add it to the game world
+        AddChild(jmp);
+        // store an extra reference to it
+        Jump.Add(jmp);
     }
 
     void LoadRocketEnemy(int x, int y)
