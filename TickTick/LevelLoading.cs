@@ -8,6 +8,7 @@ partial class Level : GameObjectList
     List<FastModifier> Fast;
     List<SlowModifier> Slow;
     List<JumpModifier> Jump;
+    List<NoDieModifier> Imm;
     void LoadLevelFromFile(string filename, int TileWidth, int TileHeight)
     {
         // open the file
@@ -64,6 +65,8 @@ partial class Level : GameObjectList
         waterDrops = new List<WaterDrop>();
         Fast = new List<FastModifier>();
         Slow = new List<SlowModifier>();
+        Jump = new List<JumpModifier>();
+        Imm = new List<NoDieModifier>();
 
         // prepare the grid arrays
         tiles = new Tile[gridWidth, gridHeight];
@@ -108,6 +111,8 @@ partial class Level : GameObjectList
             LoadSlowModifier(x, y);
         else if (symbol == 'J')
             LoadJumpModifier(x, y);
+        else if (symbol == 'U')
+            LoadNoDieModifier(x, y);
         else if (symbol == 'R')
             LoadRocketEnemy(x, y);
         else if (symbol == 'T')
@@ -198,6 +203,16 @@ partial class Level : GameObjectList
         AddChild(jmp);
         // store an extra reference to it
         Jump.Add(jmp);
+    }
+    void LoadNoDieModifier(int x, int y)
+    {
+        // create the jump object;  place it around the center of the tile
+        Vector2 pos = GetCellPosition(x, y) + new Vector2(TileWidth / 2, TileHeight / 3);
+        NoDieModifier imm = new NoDieModifier(this, pos);
+        // add it to the game world
+        AddChild(imm);
+        // store an extra reference to it
+        Imm.Add(imm);
     }
 
     void LoadRocketEnemy(int x, int y)

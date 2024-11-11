@@ -2,17 +2,16 @@ using System;
 using Microsoft.Xna.Framework;
 using Engine;
 
-class JumpModifier : SpriteGameObject
+class NoDieModifier : SpriteGameObject
 {
     Level level;
     protected float bounce;
     Vector2 startPosition;
     int counter = 0;
-    bool JumpBoostActive = false;
+    public static bool ImmActive = false;
     bool Activated = false;
-    
 
-    public JumpModifier(Level level, Vector2 startPosition) : base("Sprites/LevelObjects/Modifiers/spr_JUMP", TickTick.Depth_LevelObjects)
+    public NoDieModifier(Level level, Vector2 startPosition) : base("Sprites/LevelObjects/Modifiers/spr_Immune", TickTick.Depth_LevelObjects)
     {
         this.level = level;
         this.startPosition = startPosition;
@@ -20,13 +19,12 @@ class JumpModifier : SpriteGameObject
         Reset();
     }
 
-    public void jumper(Player player)
+    public void Immune()
     {
         Activated = true;
-        if (!JumpBoostActive)
+        if (!ImmActive)
         {
-            player.jumpSpeed += 300f;
-            JumpBoostActive = true;
+            ImmActive = true;
             counter = 0;
         }
         
@@ -36,12 +34,12 @@ class JumpModifier : SpriteGameObject
     {
         counter += gameTime.ElapsedGameTime.Milliseconds;
 
-        if (JumpBoostActive && counter >= 2000)
+        if (ImmActive && counter >= 5000)
         {
-            player.jumpSpeed -= 300f;
-            JumpBoostActive = false;
+            ImmActive = false;
             counter = 0;
             Activated = false;
+            
         }
     }
     
@@ -57,7 +55,7 @@ class JumpModifier : SpriteGameObject
         // check if the player collects this water drop
         if (Visible && level.Player.CanCollideWithObjects && HasPixelPreciseCollision(level.Player))
         {
-            jumper(level.Player);
+            Immune();
             Visible = false;
             ExtendedGame.AssetManager.PlaySoundEffect("Sounds/snd_watercollected");
         }

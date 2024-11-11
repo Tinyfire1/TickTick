@@ -6,7 +6,8 @@ using System;
 class Player : AnimatedGameObject
 {
     public float walkingSpeed = 400; // Standard walking speed, in game units per second.
-    const float jumpSpeed = 900; // Lift-off speed when the character jumps.
+    public float jumpSpeed = 900; // Lift-off speed when the character jumps.
+    const float jumpSpeed1 = 900; // a dummy jumpshift to fool
     const float gravity = 2300; // Strength of the gravity force that pulls the character down.
     const float maxFallSpeed = 1200; // The maximum vertical speed at which the character can fall.
     
@@ -111,9 +112,9 @@ class Player : AnimatedGameObject
         sprite.Mirror = facingLeft;
     }
 
-    public void Jump(float speed = jumpSpeed)
+    public void Jump(float speed = jumpSpeed1)
     {
-        velocity.Y = -speed;
+        velocity.Y = -jumpSpeed;
         // play the jump animation; always make sure that the animation restarts
         PlayAnimation("jump", true);
         // play a sound
@@ -278,12 +279,15 @@ class Player : AnimatedGameObject
 
     public void Die()
     {
-        IsAlive = false;
-        PlayAnimation("die");
-        velocity = new Vector2(0, -jumpSpeed);
-        level.Timer.Running = false;
+        if (!NoDieModifier.ImmActive)
+        {
+            IsAlive = false;
+            PlayAnimation("die");
+            velocity = new Vector2(0, -jumpSpeed);
+            level.Timer.Running = false;
 
-        ExtendedGame.AssetManager.PlaySoundEffect("Sounds/snd_player_die");
+            ExtendedGame.AssetManager.PlaySoundEffect("Sounds/snd_player_die");  
+        }
     }
 
     public void Explode()
