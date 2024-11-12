@@ -5,13 +5,17 @@ using System.IO;
 
 partial class Level : GameObjectList
 {
-    void LoadLevelFromFile(string filename, int TileWidth, int TileHeight)
+    protected void LoadLevelFromFile(string filename, int TileWidth, int TileHeight)
     {
         // open the file
         StreamReader reader = new StreamReader(filename);
 
         // read the description
         string description = reader.ReadLine();
+
+        //read the timer duration
+        string timerdur = reader.ReadLine();
+        timerD = int.Parse(timerdur);
 
         // read the rows of the grid; keep track of the longest row
         int gridWidth = 0;

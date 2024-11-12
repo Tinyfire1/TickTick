@@ -10,13 +10,15 @@ class BombTimer : GameObjectList
     public float Multiplier { get; set; }
 
     TextGameObject label;
-
+    int timer;
     public bool HasPassed { get { return timeLeft <= 0; } }
 
-    public BombTimer()
+    public BombTimer(int Timer)
     {
         localPosition = new Vector2(20, 20);
         
+        timer = Timer;
+
         // add a background image
         SpriteGameObject background = new SpriteGameObject("Sprites/UI/spr_timer", TickTick.Depth_UIBackground);
         AddChild(background);
@@ -62,7 +64,7 @@ class BombTimer : GameObjectList
     public override void Reset()
     {
         base.Reset();
-        timeLeft = 30;
+        timeLeft = timer;
         Running = true;
         Multiplier = 1;
     }
