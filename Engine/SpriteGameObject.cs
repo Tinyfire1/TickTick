@@ -190,5 +190,15 @@ namespace Engine
             // otherwise, there is no collision
             return false;
         }
+
+        public bool IsHitFromTop(SpriteGameObject other)
+        {
+            if (other.BoundingBox.Bottom >= this.BoundingBox.Top && other.BoundingBox.Bottom !<= this.BoundingBox.Bottom)
+            {
+                bool top = true;
+                return true;
+            }
+            return false;
+        }
     }
 }

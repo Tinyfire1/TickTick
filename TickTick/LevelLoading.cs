@@ -5,7 +5,11 @@ using System.IO;
 
 partial class Level : GameObjectList
 {
-    protected void LoadLevelFromFile(string filename, int TileWidth, int TileHeight)
+    List<FastModifier> Fast;
+    List<SlowModifier> Slow;
+    List<JumpModifier> Jump;
+    List<NoDieModifier> Imm;
+    void LoadLevelFromFile(string filename, int TileWidth, int TileHeight)
     {
         // open the file
         StreamReader reader = new StreamReader(filename);
@@ -63,6 +67,10 @@ partial class Level : GameObjectList
 
         // initialize the list of water drops
         waterDrops = new List<WaterDrop>();
+        Fast = new List<FastModifier>();
+        Slow = new List<SlowModifier>();
+        Jump = new List<JumpModifier>();
+        Imm = new List<NoDieModifier>();
 
         // prepare the grid arrays
         tiles = new Tile[gridWidth, gridHeight];
@@ -101,6 +109,14 @@ partial class Level : GameObjectList
             LoadGoal(x, y);
         else if (symbol == 'W')
             LoadWaterDrop(x, y);
+        else if (symbol == 'F')
+            LoadFastModifier(x, y);
+        else if (symbol == 'M')
+            LoadSlowModifier(x, y);
+        else if (symbol == 'J')
+            LoadJumpModifier(x, y);
+        else if (symbol == 'U')
+            LoadNoDieModifier(x, y);
         else if (symbol == 'R')
             LoadRocketEnemy(x, y);
         else if (symbol == 'T')
@@ -158,6 +174,49 @@ partial class Level : GameObjectList
         AddChild(w);
         // store an extra reference to it
         waterDrops.Add(w);
+    }
+    
+    void LoadFastModifier(int x, int y)
+    {
+        // create the Fast object;  place it around the center of the tile
+        Vector2 pos = GetCellPosition(x, y) + new Vector2(TileWidth / 2, TileHeight / 3);
+        FastModifier mod = new FastModifier(this, pos);
+        // add it to the game world
+        AddChild(mod);
+        // store an extra reference to it
+        Fast.Add(mod);
+    }
+    
+    void LoadSlowModifier(int x, int y)
+    {
+        // create the slow object;  place it around the center of the tile
+        Vector2 pos = GetCellPosition(x, y) + new Vector2(TileWidth / 2, TileHeight / 3);
+        SlowModifier slow = new SlowModifier(this, pos);
+        // add it to the game world
+        AddChild(slow);
+        // store an extra reference to it
+        Slow.Add(slow);
+    }
+    
+    void LoadJumpModifier(int x, int y)
+    {
+        // create the jump object;  place it around the center of the tile
+        Vector2 pos = GetCellPosition(x, y) + new Vector2(TileWidth / 2, TileHeight / 3);
+        JumpModifier jmp = new JumpModifier(this, pos);
+        // add it to the game world
+        AddChild(jmp);
+        // store an extra reference to it
+        Jump.Add(jmp);
+    }
+    void LoadNoDieModifier(int x, int y)
+    {
+        // create the jump object;  place it around the center of the tile
+        Vector2 pos = GetCellPosition(x, y) + new Vector2(TileWidth / 2, TileHeight / 3);
+        NoDieModifier imm = new NoDieModifier(this, pos);
+        // add it to the game world
+        AddChild(imm);
+        // store an extra reference to it
+        Imm.Add(imm);
     }
 
     void LoadRocketEnemy(int x, int y)
