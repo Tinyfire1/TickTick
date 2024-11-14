@@ -31,8 +31,6 @@ namespace Engine
             previousKeyboardState = currentKeyboardState;
             currentMouseState = Mouse.GetState();
             currentKeyboardState = Keyboard.GetState();
-            System.Diagnostics.Debug.WriteLine("MousePos = " + MousePositionScreen);
-            System.Diagnostics.Debug.WriteLine("LocalMousePos = " + MousePositionWorld);
         }
 
         /// <summary>

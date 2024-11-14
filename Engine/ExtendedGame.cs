@@ -140,7 +140,7 @@ namespace Engine
             if (fullScreen)
                 screenSize = new Point(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
             else
-                screenSize = windowSize;
+                screenSize = Camera.Instance.WindowSize;
 
             // scale the window to the desired size
             graphics.PreferredBackBufferWidth = screenSize.X;
@@ -152,7 +152,9 @@ namespace Engine
             GraphicsDevice.Viewport = CalculateViewport(screenSize);
 
             // calculate how the graphics should be scaled, so that the game world fits inside the window
-            spriteScale = Matrix.CreateScale((float)GraphicsDevice.Viewport.Width / worldSize.X, (float)GraphicsDevice.Viewport.Height / worldSize.Y, 1);
+            spriteScale = Matrix.CreateScale((float)GraphicsDevice.Viewport.Width / Camera.Instance.DefaultWorldSize.X, (float)GraphicsDevice.Viewport.Height / Camera.Instance.DefaultWorldSize.Y, 1);
+            
+            
         }
 
         /// <summary>
@@ -166,7 +168,7 @@ namespace Engine
             Viewport viewport = new Viewport();
 
             // calculate the two aspect ratios
-            float gameAspectRatio = (float)worldSize.X / worldSize.Y;
+            float gameAspectRatio = (float)Camera.Instance.cameraView.Width / Camera.Instance.cameraView.Height;
             float windowAspectRatio = (float)windowSize.X / windowSize.Y;
 
             // if the window is relatively wide, use the full window height

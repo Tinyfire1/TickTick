@@ -16,11 +16,11 @@ namespace Engine
         private static Camera instance;
         public Point WorldSize;
         public Point WindowSize;
-        protected Point DefaultWindowSize;
+        public Point DefaultWindowSize;
         public Point DefaultWorldSize;
         private Camera() {
 
-            DefaultWindowSize = new Point(1024, 586);
+            DefaultWindowSize = new Point(1022, 586);
             DefaultWorldSize = new Point(1440, 825);
             WindowSize = DefaultWindowSize;
             WorldSize = DefaultWorldSize;

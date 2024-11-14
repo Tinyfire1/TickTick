@@ -54,7 +54,6 @@ namespace Engine
             
             if (depth == 0.7f)
             {
-                System.Diagnostics.Debug.WriteLine("CamRight = " + (Camera.Instance.cameraView.Width + Camera.Instance.cameraPosition.X));
                 if (GlobalPosition.X + Origin.X >= Camera.Instance.WindowSize.X/2 && Camera.Instance.WorldSize.X >= Camera.Instance.cameraView.Width + Camera.Instance.cameraPosition.X + Camera.Instance.WindowSize.X/2 - Origin.X)
                 {
                     //moves the camera
